@@ -35,4 +35,6 @@ public/examples/_016_forms/cache
 .DS_Store
 
 local_config.php
+local_config.php~
+.gitignore~
 public/explorer
