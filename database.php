@@ -65,18 +65,18 @@ class DB {
        * database will ensure that we can run our tests without risking damage
        * to the local database.
        */
-      if(strpos($_SERVER['REQUEST_URI'], "/api-test/") == 0){
-        if (!file_exists('../local_test_config.php'))
-          throw new Exception ('local_test_config.php does not exist and must be created!');
-        else
-          require_once('../local_test_config.php' );
-      }
-      else
-      {
+      if(strpos($_SERVER['REQUEST_URI'], "/api-test/") === false){
         if (!file_exists('../local_config.php'))
           throw new Exception ('local_config.php does not exist and must be created!');
         else
           require_once('../local_config.php' );
+      }
+      else
+      {
+        if (!file_exists('../local_test_config.php'))
+          throw new Exception ('local_test_config.php does not exist and must be created!');
+        else
+          require_once('../local_test_config.php' );
       }
 
       //try {
