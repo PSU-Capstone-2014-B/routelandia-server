@@ -92,11 +92,13 @@ class Stations {
    * @param array $stations
    * @return bool
    */
-  function checkSameHighway($stations)
+  public static function checkSameHighway($stations)
   {
-    while($this->has_next($stations)){
+    while(Stations::has_next($stations)){
+      print(current($stations)->highwayid);
       if(current($stations)->highwayid != next($stations)->highwayid)
         return false;
+
     }
     return true;
 
@@ -111,7 +113,7 @@ class Stations {
    * @param array $array
    * @return bool
    */
-  function has_next($array) {
+  static function has_next($array) {
     if (is_array($array)) {
       if (next($array) === false) {
         return false;
