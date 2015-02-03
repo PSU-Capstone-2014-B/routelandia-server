@@ -53,16 +53,22 @@ class Stations {
    * @param int $id The station ID to calculate related onramp ID for
    * @return stdClass $retVal An object containing the ID searched for, the calculated result, and an array of relation onramps.
    * @throws \Luracast\Restler\RestException
-   * @url GET {id}/relatedonramps
+   * @url GET {id}/relatedonramp
    */
-  public function getRelatedOnramps($id) {
-    $retVal = new stdClass;
+  public function getRelatedOnramp($id) {
+	
+	try {
+		$tempStation = Stations::get($id);
+	} catch (Exception $e) {
+		throw $e;
+	}
+	$retVal = new stdClass;
     $retVal->stationid = $id;
     $retVal->relatedOnrampId = Routelandia\Entities\Station::calculateRelatedOnrampID($id);
-    $retVal->relatedOnramps = array ();
-    $onRamp = OrderedStation::fetchRelatedOnramps($retVal->relatedOnrampId);
-    if ($onRamp){
-      $retVal->relatedOnramps[] = $onRamp;
+    try {
+    	$retVal->relatedOnrampInfo = OrderedStation::fetchRelatedOnramps($retVal->relatedOnrampId);
+    } catch (Exception $e) {
+    	throw new \Luracast\Restler\RestException(404, "No Onramps were found.");
     }
     return $retVal;
   }
