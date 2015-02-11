@@ -11,7 +11,6 @@ Feature: Stations Controller
     Then the response status code should be 200
     And the response is JSON
     And the type is "object"
-    And the station is a station
     And the "stationid" property equals 1118
     And the "upstream" property equals 0
     And the "downstream" property equals 3154
@@ -22,6 +21,7 @@ Feature: Stations Controller
     And the "locationtext" property equals Barnes SB
     And the "linked_list_position" property equals 0
     And the "geojson_raw.type" property equals LineString
+    And the station is a station
 
   Scenario: request an invalid stationid
     When I request "stations/666"
