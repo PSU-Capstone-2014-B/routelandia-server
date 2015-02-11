@@ -6,6 +6,7 @@ Feature: Highways Controller
     And the response is JSON
     And the type is "array"
     And the size of the array is 2
+    And all of the highways in the array are highways
     # Check it's length? (Should be 2 with our testing database)
 
   Scenario: request valid highwayid
